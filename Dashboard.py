@@ -1,30 +1,29 @@
-# Data Vizualization Practice Project part 2
 # Dashboard to display charts based on selected Region and Year
 
 '''
-# Tasks to be performed:
+# We will perform:
 
-Part 2 : Dashboard to display charts based on selected Region and Year
-Objective:
+Dashboard to display charts based on selected Region and Year
+
 The objective of this part of the practice assignment is to create dashboards to contain your plots and charts.
 
-In this lab you will create dashboards using Dash and Plotly and then add user-interactions to your dashboards.
+We will create dashboards using Dash and Plotly and then add user-interactions to your dashboards.
 
-You will be required to create a dashboard wherein the user can select the Region and the Year. Based on the selection, the dashboard will display the following two charts:-
+We will be required to create a dashboard wherein the user can select the Region and the Year. Based on the selection, the dashboard will display the following two charts:-
 
 Pie Chart on Monthly Average Estimated Fire Area
 Bar Chart on Monthly Average Count of Pixels for Presumed Vegetation Fires
 
-Tasks to be performed
-TASK 2.1 Add title to the dashboard
+Tasks 
+1 Add title to the dashboard
 
-TASK 2.2 Add the radio items and a dropdown right below the first inner division
+2 Add the radio items and a dropdown right below the first inner division
 
-TASK 2.3 Add two empty divisions for output inside the next inner division
+3 Add two empty divisions for output inside the next inner division
 
-TASK 2.4 Add the Ouput and input components inside the app.callback decorator
+4 Add the Ouput and input components inside the app.callback decorator
 
-TASK 2.5 Add the callback function
+5 Add the callback function
 
 '''
 
@@ -52,11 +51,12 @@ df['Month'] = pd.to_datetime(df['Date']).dt.month_name() #used for the names of 
 df['Year'] = pd.to_datetime(df['Date']).dt.year
 
 #Layout Section of Dash
-#Task 1 Add the Title to the Dashboard
+# 1 Add the Title to the Dashboard
 app.layout = html.Div(children=[html.H1('Australia Wildfire Dashboard', 
                                 style={'textAlign': 'center', 'color': '#503D36',
                                 'font-size': 26}),
-# TASK 2: Add the radio items and a dropdown right below the first inner division
+                                
+# 2 Add the radio items and a dropdown right below the first inner division
      #outer division starts
      html.Div([
                    # First inner divsion for  adding dropdown helper text for Selected Drive wheels
@@ -76,7 +76,8 @@ app.layout = html.Div(children=[html.H1('Australia Wildfire Dashboard',
                             html.H2('Select Year:', style={'margin-right': '2em'}),
                         dcc.Dropdown(df.Year.unique(), value = 2005,id='year')
                     ]),
-#TASK 3: Add two empty divisions for output inside the next inner division. 
+       
+# 3 Add two empty divisions for output inside the next inner division. 
          #Second Inner division for adding 2 inner divisions for 2 output graphs
                     html.Div([
                 
@@ -88,13 +89,15 @@ app.layout = html.Div(children=[html.H1('Australia Wildfire Dashboard',
 ])
 
 #layout ends
-#TASK 4: Add the Ouput and input components inside the app.callback decorator.
+
+# 4 Add the Ouput and input components inside the app.callback decorator.
 #Place to add @app.callback Decorator
 @app.callback([Output(component_id='plot1', component_property='children'),
                Output(component_id='plot2', component_property='children')],
                [Input(component_id='region', component_property='value'),
                 Input(component_id='year', component_property='value')])
-#TASK 5: Add the callback function.   
+
+# 5 Add the callback function.   
 #Place to define the callback function
 
 def reg_year_display(input_region,input_year):
@@ -112,7 +115,6 @@ def reg_year_display(input_region,input_year):
    return [dcc.Graph(figure=fig1),
             dcc.Graph(figure=fig2) ]
 
+
 if __name__ == '__main__':
-    app.run_server()
-    
-    
+    app.run_server()  
